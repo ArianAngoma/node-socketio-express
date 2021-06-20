@@ -9,7 +9,7 @@ const socketController = (socket) => {
 
     socket.on('send-msg', (payload, callback) => {
         // Envia el mensaje (payload) hacia el cliente
-        /* socket.broadcast.emit('send-msg', payload); */
+        socket.broadcast.emit('send-msg', payload);
 
         // Retorna el id solo para el mismo cliente
         const id = uuidv4();

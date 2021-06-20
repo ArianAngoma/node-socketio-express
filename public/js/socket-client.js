@@ -7,7 +7,7 @@ const btnSend = document.querySelector('#btnSend');
 const socket = io();
 
 socket.on('connect', () => {
-    // console.log('Conectado')
+    console.log('Conectado');
     lblOffline.style.display = 'none';
     lblOnline.style.display = '';
 });
@@ -27,12 +27,18 @@ socket.on('send-msg', (payload) => {
 btnSend.addEventListener('click', () => {
     const msg = txtMsg.value;
 
+    const payload = {
+        msg,
+        date: new Date().getTime()
+    }
+
     // Envia el mensaje (msg) hacia el servidor
     /* socket.emit('send-msg', msg); */
 
     // Envia el mensaje hacia el servidor para que se muestre solo al mismo cliente
-    socket.emit('send-msg', msg, (id) => {
+    socket.emit('send-msg', payload, (id) => {
         console.log('Desde el server', id);
     });
+
 
 })
